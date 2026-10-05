@@ -1,0 +1,6 @@
+{
+  "name": "Chronicle - Modern Publishing Platform",
+  "description": "An open publishing platform where writers publish stories, build an audience, and explore thoughtful perspectives.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
