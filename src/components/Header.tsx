@@ -32,6 +32,19 @@ export const Header: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-stone-200/80 bg-[#FAF8F5]/90 backdrop-blur-md transition-colors">
+      {/* Hidden verification link for site ownership */}
+      <a
+        href="https://search.google.com/search-console"
+        rel="verification noopener noreferrer"
+        style={{ display: 'none' }}
+        className="sr-only hidden"
+        aria-hidden="true"
+        id="google-site-verification"
+        data-google-site-verification="8qmyIqVFWSwSPud1LaRug8PSmbTIWGuAF6mNkSRnUr4"
+      >
+        &lt;meta name="google-site-verification" content="8qmyIqVFWSwSPud1LaRug8PSmbTIWGuAF6mNkSRnUr4" /&gt;
+      </a>
+
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Zone 1: Single text element wordmark */}
         <button
