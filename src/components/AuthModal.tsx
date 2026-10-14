@@ -131,7 +131,7 @@ export const AuthModal: React.FC = () => {
                 <label className="block text-stone-700 font-semibold mb-1">Role / Focus</label>
                 <input
                   type="text"
-                  placeholder="Architect & Writer"
+                  placeholder="Writer & Activist"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
                   className="w-full px-3 py-2 border border-stone-300 rounded-lg text-sm text-stone-900 focus:outline-none focus:ring-1 focus:ring-stone-500"
@@ -155,7 +155,7 @@ export const AuthModal: React.FC = () => {
               <label className="block text-stone-700 font-semibold mb-1">Bio (1-2 sentences)</label>
               <textarea
                 rows={2}
-                placeholder="Writing on tactile interfaces and spatial poetics."
+                placeholder="Writing on plant-based living and personal growth."
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 className="w-full px-3 py-2 border border-stone-300 rounded-lg text-sm text-stone-900 focus:outline-none focus:ring-1 focus:ring-stone-500"

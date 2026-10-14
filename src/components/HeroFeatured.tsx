@@ -60,9 +60,9 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ article }) => {
           </div>
 
           <Link to={articleUrl} className="block group">
-            <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.5rem] leading-[1.18] font-medium text-stone-900 group-hover:text-stone-700 transition-colors text-balance">
+            <h2 className="font-serif text-3xl sm:text-4xl lg:text-[2.5rem] leading-[1.18] font-medium text-stone-900 group-hover:text-stone-700 transition-colors text-balance">
               {article.title}
-            </h1>
+            </h2>
           </Link>
 
           <p className="text-stone-600 text-base leading-relaxed line-clamp-3">

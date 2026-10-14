@@ -18,6 +18,24 @@ import {
   Sparkles,
 } from 'lucide-react';
 
+// Wraps each occurrence of the given phrases (e.g. focus keywords) in a <mark>
+const renderHighlighted = (text: string, highlights?: string[]) => {
+  const phrases = (highlights || []).filter(Boolean).sort((a, b) => b.length - a.length);
+  if (!phrases.length) return text;
+  const pattern = phrases.map((p) => p.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+  // Splitting on a capture group puts the matched phrases at the odd indices
+  const parts = text.split(new RegExp(`(${pattern})`));
+  return parts.map((part, i) =>
+    i % 2 === 1 ? (
+      <mark key={i} className="bg-amber-100 text-amber-900 px-1.5 rounded-md box-decoration-clone">
+        {part}
+      </mark>
+    ) : (
+      part
+    )
+  );
+};
+
 export const ArticleView: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
@@ -461,11 +479,11 @@ export const ArticleView: React.FC = () => {
 
         {/* Title & Deck */}
         <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium text-stone-900 leading-[1.15] text-balance mb-5">
-          {article.title}
+          {renderHighlighted(article.title, article.titleHighlights)}
         </h1>
 
         <p className="text-lg sm:text-xl text-stone-600 leading-relaxed font-serif italic mb-8">
-          {article.subtitle}
+          {renderHighlighted(article.subtitle, article.subtitleHighlights)}
         </p>
 
         {/* Author Byline Ribbon */}

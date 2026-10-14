@@ -56,6 +56,16 @@ export const FeedView: React.FC = () => {
 
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      {/* Page Heading (the homepage's single H1) */}
+      <div className="mb-8">
+        <h1 className="font-serif text-3xl sm:text-4xl font-medium text-stone-900 tracking-tight">
+          Essays on Veganism, Feminism, and Self Growth
+        </h1>
+        <p className="text-sm text-stone-500 mt-2 max-w-2xl">
+          Research-backed stories on plant-based living, gender equality, and becoming who you want to be.
+        </p>
+      </div>
+
       {/* Search & Topic Segmented Filter Strip */}
       <div className="mb-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 border-b border-stone-200/70 pb-6">
         {/* Category Tabs */}

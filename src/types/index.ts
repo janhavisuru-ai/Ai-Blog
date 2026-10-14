@@ -33,7 +33,9 @@ export interface Article {
   id: string;
   slug: string;
   title: string;
+  titleHighlights?: string[];
   subtitle: string;
+  subtitleHighlights?: string[];
   content: string;
   coverImage: string;
   coverImageAlt: string;

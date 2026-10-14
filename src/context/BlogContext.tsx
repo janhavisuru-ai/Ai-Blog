@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Article, User, Comment, ViewMode, FontPreference, FontSizePreference } from '../types';
-import { SEED_USERS, SEED_ARTICLES, SEED_COMMENTS } from '../data/seedData';
+import { SEED_USERS, SEED_ARTICLES, SEED_COMMENTS, RETIRED_SEED_IDS } from '../data/seedData';
 import {
   heroEditorialSpaces,
   coverNeuralNature,
@@ -114,7 +114,9 @@ const sanitizeArticle = (a: any): Article => ({
   id: String(a?.id || `art-${Date.now()}`),
   slug: String(a?.slug || `story-${Date.now()}`),
   title: String(a?.title || 'Untitled Story'),
+  titleHighlights: Array.isArray(a?.titleHighlights) ? a.titleHighlights.map(String) : undefined,
   subtitle: String(a?.subtitle || ''),
+  subtitleHighlights: Array.isArray(a?.subtitleHighlights) ? a.subtitleHighlights.map(String) : undefined,
   content: String(a?.content || ''),
   coverImage: resolveCoverImage(a?.coverImage),
   coverImageAlt: String(a?.coverImageAlt || a?.title || 'Article cover'),
@@ -179,7 +181,7 @@ export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       // Merge: preserve user-written articles while updating seed articles with latest content and figures
       const userCreated = parsed
-        .filter((a) => !SEED_ARTICLES.some((s) => s.id === a?.id))
+        .filter((a) => !SEED_ARTICLES.some((s) => s.id === a?.id) && !RETIRED_SEED_IDS.includes(a?.id))
         .map(sanitizeArticle);
 
       const updatedSeeds = SEED_ARTICLES.map((seed) => {
@@ -212,7 +214,9 @@ export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children
       if (!stored) return SEED_COMMENTS;
       const parsed = JSON.parse(stored);
       if (!Array.isArray(parsed)) return SEED_COMMENTS;
-      const userComments = parsed.filter((c) => !SEED_COMMENTS.some((s) => s.id === c?.id));
+      const userComments = parsed.filter(
+        (c) => !SEED_COMMENTS.some((s) => s.id === c?.id) && !RETIRED_SEED_IDS.includes(c?.id)
+      );
       return [...SEED_COMMENTS, ...userComments];
     } catch {
       return SEED_COMMENTS;

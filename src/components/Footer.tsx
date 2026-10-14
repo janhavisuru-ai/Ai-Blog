@@ -14,7 +14,7 @@ export const Footer: React.FC = () => {
               Chronicle
             </Link>
             <p className="text-xs text-stone-500 mt-1 max-w-md">
-              An open publishing platform for long-form essays, thoughtful criticism, and timeless crafts.
+              An open publishing platform for essays on plant-based living, feminism, and personal growth.
             </p>
           </div>
 

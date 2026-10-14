@@ -2,10 +2,7 @@ import { Article, User, Comment } from '../types';
 import {
   heroEditorialSpaces,
   coverNeuralNature,
-  coverKyotoSolitude,
   coverTypographyInk,
-  coverPhilosophyMemory,
-  coverNocturnalUrbanism,
   figureMonasticCourtyard,
   figureMyceliumMicro,
 } from '../assets/images';
@@ -17,7 +14,7 @@ export const SEED_USERS: User[] = [
     handle: '@elenarostova',
     email: 'elena@chronicle.journal',
     avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena&backgroundColor=f5ebe0',
-    bio: 'Architectural theorist and cultural critic. Writing on the spatial psychology of the digital age.',
+    bio: 'Cultural critic writing on feminism, work, and the slow craft of becoming who you are.',
     role: 'Contributing Editor',
     location: 'Zurich & Vienna',
     website: 'https://elenarostova.ch',
@@ -26,7 +23,7 @@ export const SEED_USERS: User[] = [
     followersCount: 1420,
     followingCount: 88,
     followingUserIds: ['user-2'],
-    bookmarkedArticleIds: ['art-2', 'art-4', 'art-5'],
+    bookmarkedArticleIds: ['art-2', 'art-4'],
   },
   {
     id: 'user-2',
@@ -34,8 +31,8 @@ export const SEED_USERS: User[] = [
     handle: '@marcusvance',
     email: 'marcus@chronicle.journal',
     avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Marcus&backgroundColor=e3ede8',
-    bio: 'Systems biologist and research fellow studying emergent communication in non-human ecosystems.',
-    role: 'Research Fellow',
+    bio: 'Food systems researcher studying how what we eat shapes land, water, and climate.',
+    role: 'Food Systems Researcher',
     location: 'Cambridge, MA',
     website: 'https://vance-lab.org',
     twitter: 'marcus_vance',
@@ -43,7 +40,7 @@ export const SEED_USERS: User[] = [
     followersCount: 890,
     followingCount: 142,
     followingUserIds: ['user-1', 'user-3'],
-    bookmarkedArticleIds: ['art-1', 'art-6'],
+    bookmarkedArticleIds: ['art-1'],
   },
   {
     id: 'user-3',
@@ -51,14 +48,14 @@ export const SEED_USERS: User[] = [
     handle: '@soratakahashi',
     email: 'sora@chronicle.journal',
     avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sora&backgroundColor=fae1dd',
-    bio: 'Book collector, essayist, and founder of the Kyoto Slow Reading Circle. Curious about contemplative crafts.',
-    role: 'Essayist & Bibliophile',
+    bio: 'Essayist and home cook in Kyoto. Writing on plant-based temple cooking, journaling, and gentle self-discipline.',
+    role: 'Essayist & Home Cook',
     location: 'Kyoto, Japan',
     joinedDate: 'March 2025',
     followersCount: 2150,
     followingCount: 310,
     followingUserIds: ['user-1'],
-    bookmarkedArticleIds: ['art-1', 'art-3', 'art-5'],
+    bookmarkedArticleIds: ['art-1'],
   },
   {
     id: 'user-4',
@@ -66,25 +63,27 @@ export const SEED_USERS: User[] = [
     handle: '@julianmercer',
     email: 'julian@chronicle.journal',
     avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Julian&backgroundColor=d8e2dc',
-    bio: 'Typographer, book designer, and interface craftsman. Exploring tactile typography and enduring software.',
-    role: 'Typographer & Designer',
+    bio: 'Historian of science and editor, recovering the stories of women whose discoveries were credited to others.',
+    role: 'Science Historian',
     location: 'London, UK',
     joinedDate: 'May 2025',
     followersCount: 1740,
     followingCount: 95,
     followingUserIds: ['user-2'],
-    bookmarkedArticleIds: ['art-1', 'art-6'],
+    bookmarkedArticleIds: ['art-1'],
   },
 ];
 
 export const SEED_ARTICLES: Article[] = [
   {
     id: 'art-1',
-    slug: 'quiet-architecture-of-digital-spaces',
-    title: 'The Quiet Architecture of Digital Spaces: Reclaiming Solitude in a Hyper-Connected Century',
-    subtitle: 'Why our software environments need silent courtyards, thicker digital walls, and spaces designed for reverie rather than velocity.',
-    category: 'Architecture & Design',
-    tags: ['Solitude', 'Spatial Design', 'Digital Well-being', 'Architecture'],
+    slug: 'how-long-to-form-a-habit',
+    title: 'How Long Does It Take to Form a Habit? What the Science Says',
+    titleHighlights: ['Form a Habit'],
+    subtitle: 'Forget the 21-day myth. Research shows a new habit takes 66 days on average to stick, and real self growth comes from small, repeatable steps.',
+    subtitleHighlights: ['66 days', 'self growth'],
+    category: 'Self Growth',
+    tags: ['Habits', 'Mindset', 'Personal Growth', 'Patience'],
     authorId: 'user-1',
     author: {
       id: 'user-1',
@@ -92,11 +91,11 @@ export const SEED_ARTICLES: Article[] = [
       handle: '@elenarostova',
       avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena&backgroundColor=f5ebe0',
       role: 'Contributing Editor',
-      bio: 'Architectural theorist and cultural critic.',
+      bio: 'Cultural critic writing on feminism, work, and becoming.',
     },
     coverImage: heroEditorialSpaces,
-    coverImageAlt: 'Minimalist library pavilion with morning sunlight casting geometric shadows',
-    coverCaption: 'Figure 1. Light and void in contemplative civic spaces. Photographed at the Serpentine Pavilion.',
+    coverImageAlt: 'A man reading alone at a long wooden table in a sunlit library',
+    coverCaption: 'Figure 1. Growth rarely looks dramatic from the outside. Mostly, it looks like showing up.',
     publishedAt: 'October 1, 2026',
     readTime: 6,
     claps: 342,
@@ -105,49 +104,53 @@ export const SEED_ARTICLES: Article[] = [
     isDraft: false,
     isFeatured: true,
     commentsCount: 3,
-    content: `When Juhani Pallasmaa wrote *The Eyes of the Skin*, he warned against an architectural culture obsessed with ocular dominance—spaces designed solely to be photographed rather than inhabited. Decades later, software design succumbed to precisely this pathology.
+    content: `We are sold transformation as an event: the thirty-day challenge, the dramatic before-and-after, the morning routine that promises to rewire a life by Friday. When the change does not arrive on schedule, we conclude that we lack discipline, and we quit.
 
-We have built an entire planetary information architecture composed entirely of bustling metropolitan thoroughfares. Every screen is a neon-lit crosswalk. There are no quiet cloisters, no monastic reading desks, no anterooms where one might sit in undisturbed contemplation before opening a letter.
+But the people who actually change rarely describe a single turning point. They describe a long, quiet middle—weeks in which nothing seemed to happen, followed by the slow realisation that something had.
 
-### The Tyranny of the Urgent Feed
+### What the Research Actually Says
 
-In physical architecture, transitions matter. A monastery does not place its inner altar onto the city boulevard. You cross an outer threshold, traverse a gravel courtyard where your footsteps sound out your deceleration, step through a heavy cedar portal, and only then enter the sacred quietude.
+In a study published in 2010, a team at University College London led by Phillippa Lally followed 96 volunteers as they tried to turn a new daily behaviour—drinking water with lunch, a short run before dinner—into a habit.
 
-> "A room is not simply an enclosure of cubic meters; it is a membrane that calibrates the speed of thought."
+On average, it took 66 days for the behaviour to feel automatic. Individual results ranged from 18 days to an estimated 254. And crucially, missing a single day made no meaningful difference to the outcome.
 
-Our digital interfaces lack this spatial graduation. We flip in eight milliseconds from a grief-stricken personal dispatch to an algorithmic advertising banner to an urgent group chat alert. The psychological consequence is not merely cognitive exhaustion; it is an incapacity for sustained synthetic thought.
+> "Growth is not a breakthrough. It is the accumulation of ordinary days you decided not to waste."
 
-### Designing Digital Courtyards
+The popular "21 days to a new habit" is not a finding; it is a hope. Expecting change on that timeline is how most of us talk ourselves out of change that was already under way.
 
-![Figure 2. Light and quiet stone courtyards in contemplative monastic architecture](${figureMonasticCourtyard})
+### Designing for the Long Middle
 
-What would it mean to construct an interface governed by the logic of stone and timber rather than ticker tape?
+![Figure 2. A shaft of sunlight falls across the stone wall of a quiet cloister, mirrored in a still pool. Growth needs unhurried space.](${figureMonasticCourtyard})
 
-1. **Deliberate Latency**: Introducing friction into dispatch. The beauty of physical letters was partly the knowledge that hours passed between writing, sealing, and reading.
-2. **Negative Screen Space as Sanctuary**: White space on a page is not "unused inventory." It is the oxygen that permits an idea to resonate.
-3. **Absence of Ambient Surveillance**: A room where you feel watched changes how you posture. A text editor with telemetry indicators is fundamentally inhospitable to vulnerability.
+If boredom is the texture of real progress, then the goal is not more motivation. It is a practice that survives the dull weeks:
 
-If the first forty years of computing were dedicated to speed, interconnectivity, and ubiquity, the next forty must be dedicated to boundary, sanctuary, and stillness. We do not need more notification chimes; we need digital spaces with the acoustic dignity of ancient stone chapels.`,
+1. **Shrink the Starting Line**: Two pages, not two chapters. Five minutes of stretching, not an hour at the gym. A habit you can do on your worst day is a habit you will still be doing in a year.
+2. **Track the Streak, Forgive the Gap**: Record what you do, but treat a missed day as data rather than a verdict. The research is clear that one lapse does not reset the clock.
+3. **Measure in Seasons, Not Weeks**: Compare yourself to who you were three months ago, never to who you were last Tuesday. Weekly progress is noise; seasonal progress is signal.
+
+The most important skill in self growth is not willpower. It is the patience to keep going while nothing visible is happening—because that is exactly when the work is being done.`,
   },
   {
     id: 'art-2',
-    slug: 'biomimicry-in-the-age-of-silicon',
-    title: 'Biomimicry in the Age of Silicon: What Slime Molds Teach Us About Distributed Networks',
-    subtitle: 'Looking beyond human engineering hubris toward billion-year-old subterranean routing algorithms.',
-    category: 'Science & Technology',
-    tags: ['Biomimicry', 'Networks', 'Biology', 'Algorithms'],
+    slug: 'veganism-environmental-impact',
+    title: 'How Does Veganism Impact the Planet?',
+    titleHighlights: ['Veganism'],
+    subtitle: 'Animal farming occupies most of the world’s farmland yet supplies a small share of our calories. Here is what changes when the plate changes.',
+    subtitleHighlights: ['Animal farming'],
+    category: 'Veganism',
+    tags: ['Plant-Based', 'Climate', 'Food Systems', 'Sustainability'],
     authorId: 'user-2',
     author: {
       id: 'user-2',
       name: 'Marcus Vance',
       handle: '@marcusvance',
       avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Marcus&backgroundColor=e3ede8',
-      role: 'Research Fellow',
-      bio: 'Systems biologist and research fellow.',
+      role: 'Food Systems Researcher',
+      bio: 'Food systems researcher.',
     },
     coverImage: coverNeuralNature,
-    coverImageAlt: 'Bioluminescent fungal mycelium and optic light fibers in forest floor',
-    coverCaption: 'Subterranean hyphal networks displaying adaptive resource routing.',
+    coverImageAlt: 'Glowing fungal mycelium threading through a mossy forest floor',
+    coverCaption: 'Healthy soil is a living network. How much land we farm, and for what, decides how much of it survives.',
     publishedAt: 'September 28, 2026',
     readTime: 5,
     claps: 218,
@@ -155,93 +158,59 @@ If the first forty years of computing were dedicated to speed, interconnectivity
     views: 2940,
     isDraft: false,
     commentsCount: 2,
-    content: `In 2010, Japanese researcher Atsushi Tero placed oat flakes on a wet agar surface arranged in the precise geographic configuration of the cities surrounding Tokyo. At the center, he inoculated a single sample of *Physarum polycephalum*—the yellow slime mold.
+    content: `In 2018, Joseph Poore and Thomas Nemecek published what remains one of the most comprehensive studies of food's environmental impact. Writing in *Science*, they assembled data from roughly 38,700 farms across 119 countries, covering about 40 of the foods that make up most of what humanity eats.
 
-Within twenty-six hours, the organism had deployed a network of tubular veins linking the food sources. When transport engineers compared the organism's biological vascular network with the Tokyo subway rail system—designed over decades by teams of elite civil engineers—they found them almost topologically identical.
+Their conclusion was blunt: of all the choices an individual can make to shrink their environmental footprint, few are as powerful as what they put on their plate.
 
-### Redundancy Without Bureaucracy
+### Most of the Land, a Fraction of the Food
 
-![Figure 2. Subterranean mycelium network exhibiting non-centralized topological routing](${figureMyceliumMicro})
+![Figure 2. Golden and blue fungal threads branch through dark soil in close-up. Land released from grazing can return to living habitat.](${figureMyceliumMicro})
 
-How does an organism without a central nervous system, without a supervisor, and without a global map solve NP-hard routing problems with such effortless grace?
-
-The secret lies in local feedback loops. If a nutrient stream flows vigorously through a particular vein, the shear stress expands the wall diameter. If flow drops, the vein withers and is recycled into raw biomass.
+The study's most striking finding is a mismatch between what animal farming takes and what it gives back:
 
 \`\`\`
-Algorithm: Slime Mold Edge Relaxation
-1. Deploy exploratory pseudopodia uniformly across space.
-2. On contact with nutrient node, amplify metabolic oscillation.
-3. Reinforce high-flux conduit (Width proportional to Flow Rate).
-4. Prune redundant loops below threshold epsilon.
+Global farmland vs. what it returns (Poore & Nemecek, 2018)
+Meat, dairy, eggs, aquaculture  -> 83% of farmland -> 18% of calories, 37% of protein
+Plant foods                     -> 17% of farmland -> 82% of calories, 63% of protein
 \`\`\`
 
-Our modern distributed server architectures, by contrast, frequently rely on fragile centralized orchestrators. When a coordination cluster suffers a split-brain condition, cascades bring down continents of cloud computation. Subterranean nature solved fault-tolerance over a billion years ago: no master node, purely localized physics, perpetual self-healing.`,
-  },
-  {
-    id: 'art-3',
-    slug: 'the-lost-art-of-deep-reading',
-    title: 'The Lost Art of Deep Reading in a Fragmented World',
-    subtitle: 'Rediscovering the profound cognitive communion between solitary reader and enduring prose.',
-    category: 'Culture & Essay',
-    tags: ['Reading', 'Literature', 'Focus', 'Philosophy'],
-    authorId: 'user-3',
-    author: {
-      id: 'user-3',
-      name: 'Sora Takahashi',
-      handle: '@soratakahashi',
-      avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sora&backgroundColor=fae1dd',
-      role: 'Essayist & Bibliophile',
-      bio: 'Book collector, essayist, and founder of Kyoto Slow Reading.',
-    },
-    coverImage: coverKyotoSolitude,
-    coverImageAlt: 'Rain-streaked bookstore window in Kyoto at dusk with warm interior glow',
-    coverCaption: 'Figure 3. Solitary hours among secondhand volumes, Kyoto.',
-    publishedAt: 'September 24, 2026',
-    readTime: 7,
-    claps: 512,
-    clappedBy: { 'user-1': 20, 'user-4': 10 },
-    views: 6110,
-    isDraft: false,
-    commentsCount: 4,
-    content: `In the northern quarter of Kyoto, down an alley too narrow for taxis, sits a wooden storefront with a faded indigo noren. Inside, shelves sag beneath forty thousand volumes of translated poetry, German metaphysics, and botanical treatises.
+Even the comparison most favourable to meat holds the pattern. The study found that the lowest-impact beef still produced around six times more greenhouse gas emissions, and used about thirty-six times more land, than peas.
 
-There is no Wi-Fi here. The only sound is the rhythmic hiss of an iron kettle on a charcoal brazier and the dry rustle of aging mulberry paper.
+Modelled at a global scale, a shift to diets without animal products would cut food's land use by about 3.1 billion hectares—a reduction of 76%, an area roughly the size of Africa—and food's greenhouse gas emissions by about 49%.
 
-### Skimming is Not Reading
+> "Going vegan is not a sacrifice in this arithmetic. It is the single largest lever most of us will ever hold over our own footprint."
 
-Neuroscientist Maryanne Wolf has demonstrated that the digital reading brain behaves fundamentally differently from the book-reading brain. When reading on a backlit glass screen, the eye tracks in an F-pattern: scanning the first two lines, grazing the middle left margin, and darting to the conclusion.
+### Progress, Not Purity
 
-We become hunters of keywords rather than companions of sentences.
+None of this demands perfection on day one. The numbers reward direction, not dogma:
 
-> "To read deeply is to loan one's consciousness to another human mind across centuries of darkness."
+1. **Start With the Biggest Swaps**: Beef and lamb carry the heaviest footprint per gram of protein. Replacing them with lentils, beans, or tofu a few nights a week moves the needle more than any other single change.
+2. **Rethink Dairy Quietly**: Oat, soy, and pea milks are now easy defaults in most cafés. A daily latte is a habit worth switching once.
+3. **Cook, Don't Just Substitute**: The most sustainable vegans are rarely the ones living on processed imitations. They are the ones who learned to love chickpeas.
 
-When you read a dense paragraph of Virginia Woolf or Montaigne, you are forced to surrender your pacing to the author's internal breath. You cannot '1.5x' a lyric essay without destroying the rhythmic tension that carries its philosophical payload.
-
-### A Modest Manifesto for Slow Literacy
-
-1. **One Window, One Mind**: Close all other viewports. A reader who balances an essay against a chat sidebar has already ceded the territory.
-2. **Read with a Pencil**: The marginal note is an act of defiance against disposable consumption. It marks the moment where reading shifts from passive absorption into dialogue.
-3. **The Twenty-Minute Threshold**: The mind will resist for the first ten minutes. It will crave the dopamine twitch of notifications. If you hold through the sixteenth minute, the cognitive water clears, and deep immersion takes root.`,
+The plant-based plate is not a trend. It is what the data has been saying for years.`,
   },
   {
     id: 'art-4',
-    slug: 'crafting-timeless-interfaces',
-    title: 'Crafting Timeless Interfaces in an Era of Ephemera',
-    subtitle: 'Principles borrowed from classical typography and bookmaking for digital products that will outlive next year’s design trend.',
-    category: 'Craft & Writing',
-    tags: ['Typography', 'UI Design', 'Craftsmanship', 'Design Systems'],
+    slug: 'matilda-effect-women-in-science',
+    title: 'The Matilda Effect: The Women Whose Discoveries Were Credited to Men',
+    titleHighlights: ['Matilda Effect'],
+    subtitle: 'From DNA to nuclear fission to pulsars, the history of science is full of women who did the work while others collected the prize.',
+    subtitleHighlights: ['history of science', 'full of women'],
+    category: 'Feminism',
+    tags: ['Feminism', 'History', 'Women in Science', 'Equality'],
     authorId: 'user-4',
     author: {
       id: 'user-4',
       name: 'Julian Mercer',
       handle: '@julianmercer',
       avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Julian&backgroundColor=d8e2dc',
-      role: 'Typographer & Designer',
-      bio: 'Typographer, book designer, and interface craftsman.',
+      role: 'Science Historian',
+      bio: 'Historian of science and editor.',
     },
     coverImage: coverTypographyInk,
     coverImageAlt: 'Vintage metal letterpress movable type blocks coated in dark ink',
-    coverCaption: 'Figure 4. Lead and antimony type matrices at the Whittington Press.',
+    coverCaption: 'Figure 4. History is set in type by whoever controls the press.',
     publishedAt: 'September 19, 2026',
     readTime: 4,
     claps: 189,
@@ -249,103 +218,25 @@ When you read a dense paragraph of Virginia Woolf or Montaigne, you are forced t
     views: 3200,
     isDraft: false,
     commentsCount: 1,
-    content: `Every few years, the software industry changes its skin. We have lived through glossy skeuomorphism, severe flat minimalism, pastel neomorphism, and now frosted glass gradients. Each generation mocks the previous one while earnestly believing its current aesthetic represents the apex of modern taste.
+    content: `In 1993, historian of science Margaret Rossiter gave a name to a pattern she had spent her career documenting: the systematic tendency to credit women's scientific work to the men around them. She called it the *Matilda effect*, after the American suffragist Matilda Joslyn Gage, who had described the same injustice more than a century earlier.
 
-Yet pick up an edition of the *Aldine Press* printed in Venice in 1501, or Jan Tschichold’s Penguin paperbacks from 1947. They do not feel dated. They feel authoritative, serene, and immediately legible.
+Once you know the name, you start to see it everywhere.
 
-### Why Classical Books Do Not Age
+### Three Stories, One Pattern
 
-Classical typography survives because it is grounded in optical physiology rather than technological novelty:
+1. **Rosalind Franklin**: In 1952, Franklin and her student Raymond Gosling produced an X-ray diffraction image of DNA known as Photo 51. It was shown to James Watson without her knowledge and became key evidence for the double helix. Watson, Francis Crick, and Maurice Wilkins received the 1962 Nobel Prize. Franklin had died four years earlier, at 37.
+2. **Lise Meitner**: Working with her nephew Otto Frisch, Meitner provided the physical explanation of nuclear fission in 1939. The 1944 Nobel Prize in Chemistry for the discovery went to her long-time collaborator Otto Hahn alone.
+3. **Jocelyn Bell Burnell**: As a graduate student in 1967, Bell Burnell noticed the strange signal that turned out to be the first known pulsar. The 1974 Nobel Prize in Physics went to her supervisor, Antony Hewish, and to Martin Ryle.
 
-- **The Reading Measure**: Human binocular vision comfortably scans lines between 60 and 75 characters. Exceed that, and the eye tires jumping back to find the next line start.
-- **Rhythm Over Ornament**: A great layout requires neither drop shadows nor borders; it requires an uncompromising proportional ratio between title, subtitle, paragraph, and margins.
-- **Ink Contrast**: Black ink on unbleached warm cotton. High enough contrast to prevent eye strain; soft enough to avoid glare.
+Bell Burnell has answered the story with remarkable grace. In 2018, she received the Breakthrough Prize in Fundamental Physics and donated the entire $3 million award to fund scholarships for under-represented students in physics.
 
-When building web software, resist the temptation to decorate every empty quadrant with translucent pill capsules and floating badges. Let the prose speak with the gravitas of lead type on warm paper.`,
-  },
-  {
-    id: 'art-5',
-    slug: 'the-ethics-of-artificial-memory',
-    title: 'The Ethics of Artificial Memory: What Happens When We Can Never Forget?',
-    subtitle: 'Exploring the cognitive necessity of forgetting, digital permanence, and the human soul.',
-    category: 'Philosophy',
-    tags: ['Philosophy', 'Memory', 'Consciousness', 'Ethics'],
-    authorId: 'user-1',
-    author: {
-      id: 'user-1',
-      name: 'Elena Rostova',
-      handle: '@elenarostova',
-      avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena&backgroundColor=f5ebe0',
-      role: 'Contributing Editor',
-      bio: 'Architectural theorist and cultural critic.',
-    },
-    coverImage: coverPhilosophyMemory,
-    coverImageAlt: 'Classical marble statue with translucent optical prisms in warm library light',
-    coverCaption: 'Figure 5. The refraction of memory and human cognition through technological prisms.',
-    publishedAt: 'October 3, 2026',
-    readTime: 6,
-    claps: 295,
-    clappedBy: { 'user-3': 18, 'user-2': 24 },
-    views: 3840,
-    isDraft: false,
-    commentsCount: 2,
-    content: `Jorge Luis Borges once conceived of Funes the Memorious—a youth from Fray Bentos who, following a fall from a horse, lost the capacity to forget. Funes remembered not only every tree on every hill, but every leaf on every branch at every distinct hour of the afternoon.
+> "Credit is not vanity. It decides who gets funded, who gets hired, and who the next generation believes a scientist looks like."
 
-Yet Borges made a devastating observation: Funes was virtually incapable of profound thought. For to think is to ignore differences, to generalize, to abstract. In the over-stocked world of Funes, there was only immediate detail.
+### Why It Still Matters
 
-### The Gentle Mercy of Erosion
+The Matilda effect is not only a historical footnote. It persists in quieter forms: in whose papers get cited, whose names go first on author lists, and whose ideas are repeated in meetings only after a man says them.
 
-For millennia, human civilization developed within the grace of organic oblivion. Memories softened around the edges. Youthful humiliations faded into fond anecdotes. An argument between neighbors was slowly smoothed over by the sedimentation of seasons.
-
-Today, our recording devices preserve every sentence, every casual remark, every timestamped transgression in cold crystalline storage. We have created a technological substrate that refuses to let the past recede into gentle shadow.
-
-> "Forgetting is not an error in biological storage; it is the very engine of psychological synthesis."
-
-### Designing for Oblivion
-
-If we wish to build humane systems, we must design software that knows how to let go. We must build into our databases the digital equivalent of autumn leaves—data that degrades gracefully, records that lose their sharp punitive resolution over time, and spaces where forgiveness is architecturally native rather than legally demanded.`,
-  },
-  {
-    id: 'art-6',
-    slug: 'the-nocturnal-city-quiet-imagination',
-    title: 'The Nocturnal City: How Urban Darkness Cultivates Human Imagination',
-    subtitle: 'Why modern cities must protect the night from artificial perpetual daylight to restore psychological wonder.',
-    category: 'Urbanism',
-    tags: ['Urbanism', 'Architecture', 'Night', 'Psychology'],
-    authorId: 'user-3',
-    author: {
-      id: 'user-3',
-      name: 'Sora Takahashi',
-      handle: '@soratakahashi',
-      avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sora&backgroundColor=fae1dd',
-      role: 'Essayist & Bibliophile',
-      bio: 'Book collector, essayist, and founder of Kyoto Slow Reading.',
-    },
-    coverImage: coverNocturnalUrbanism,
-    coverImageAlt: 'Quiet European cobblestone street at midnight illuminated by warm lanterns',
-    coverCaption: 'Figure 6. The quiet dignity of midnight streets in European old towns.',
-    publishedAt: 'October 6, 2026',
-    readTime: 5,
-    claps: 367,
-    clappedBy: { 'user-1': 30, 'user-4': 22 },
-    views: 4120,
-    isDraft: false,
-    commentsCount: 3,
-    content: `Stand at 2:00 AM on the wet cobblestones of an ancient quarter when the shops are shuttered and the cars have vanished into subterranean garages. The buildings appear taller, their pediments reaching into an ink-black sky.
-
-In the dark, the city ceases to be a machine for commerce and becomes a theater for the interior life.
-
-### The Curse of Perpetual Noon
-
-Since the mass adoption of ultra-bright cold LED streetlights, our metropolitan regions have banished the twilight. We have colonized the midnight hours with high-lumen glare designed to eliminate any pocket of mystery.
-
-Yet psychologists and urban poets alike have long recognized that darkness is the companion of interiority:
-
-- **Acoustic Softening**: At night, sound carries differently. Footsteps strike the stone with resonance, making the walker aware of their own cadence.
-- **The Threshold of the Visible**: When you cannot see every millimeter of a facade, your imagination fills the void. The gargoyle is sketched in the mind rather than broadcast in 4K.
-- **Reclaiming the Celestial Canopy**: A city that cannot see the stars has forgotten its place in the cosmos.
-
-To redesign the nocturnal city is not to invite danger; it is to replace harsh illumination with warm, directed pools of golden light—inviting conversation, contemplation, and restorative silence.`,
+Feminism, in this sense, is partly an act of accurate record-keeping. Telling these stories correctly is not rewriting history. It is finally finishing it.`,
   },
 ];
 
@@ -357,7 +248,7 @@ export const SEED_COMMENTS: Comment[] = [
     authorName: 'Marcus Vance',
     authorHandle: '@marcusvance',
     authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Marcus&backgroundColor=e3ede8',
-    content: 'The architectural metaphor of the monastery cloister is brilliant here. In biological networks, separation is just as essential as transmission. Without cellular membranes, there is no homeostasis.',
+    content: 'The 66-day figure is such a relief. I have abandoned habits at week three thinking I was failing, when I was simply still in the long middle.',
     createdAt: '2 days ago',
     likes: 18,
     likedBy: ['user-1', 'user-3'],
@@ -369,7 +260,7 @@ export const SEED_COMMENTS: Comment[] = [
     authorName: 'Sora Takahashi',
     authorHandle: '@soratakahashi',
     authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sora&backgroundColor=fae1dd',
-    content: 'Reminds me strongly of Jun’ichiro Tanizaki’s "In Praise of Shadows"—the idea that beauty exists not in the luminosity itself, but in the variety of shadows and quiet obscurity.',
+    content: 'Measuring in seasons rather than weeks is exactly what my vegetable garden taught me. Nothing grows faster because you stare at it.',
     createdAt: '1 day ago',
     likes: 14,
     likedBy: ['user-1'],
@@ -381,55 +272,20 @@ export const SEED_COMMENTS: Comment[] = [
     authorName: 'Julian Mercer',
     authorHandle: '@julianmercer',
     authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Julian&backgroundColor=d8e2dc',
-    content: 'Particularly agree on the point about telemetry indicators. A flashing green status dot in an editor destroys the illusion of solitary composition.',
+    content: '"Track the streak, forgive the gap." Writing that on an index card for my desk.',
     createdAt: '12 hours ago',
     likes: 9,
     likedBy: ['user-2'],
-  },
-  {
-    id: 'c-4',
-    articleId: 'art-3',
-    authorId: 'user-1',
-    authorName: 'Elena Rostova',
-    authorHandle: '@elenarostova',
-    authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena&backgroundColor=f5ebe0',
-    content: 'The 20-minute threshold rule is something I have now instituted in my morning routine. The friction of the first ten minutes is remarkable, but the other side is pure gold.',
-    createdAt: '3 days ago',
-    likes: 22,
-    likedBy: ['user-3', 'user-2'],
-  },
-  {
-    id: 'c-5',
-    articleId: 'art-5',
-    authorId: 'user-3',
-    authorName: 'Sora Takahashi',
-    authorHandle: '@soratakahashi',
-    authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sora&backgroundColor=fae1dd',
-    content: 'Borges’ Funes is the patron saint of our digital dilemma. This distinction between archiving data and genuine human synthesis is profound.',
-    createdAt: '1 day ago',
-    likes: 16,
-    likedBy: ['user-1', 'user-4'],
-  },
-  {
-    id: 'c-6',
-    articleId: 'art-6',
-    authorId: 'user-1',
-    authorName: 'Elena Rostova',
-    authorHandle: '@elenarostova',
-    authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena&backgroundColor=f5ebe0',
-    content: 'Lighting design is the most neglected realm of contemporary urbanism. Cold 5000K LEDs have stripped our streets of romance and twilight contemplation.',
-    createdAt: '18 hours ago',
-    likes: 21,
-    likedBy: ['user-3'],
   },
 ];
 
 export const CATEGORIES = [
   'All Topics',
-  'Architecture & Design',
-  'Science & Technology',
-  'Culture & Essay',
-  'Craft & Writing',
-  'Philosophy',
-  'Urbanism',
+  'Veganism',
+  'Feminism',
+  'Self Growth',
 ];
+
+// Seed articles/comments that have been removed. Browsers that loaded them earlier still hold
+// them in localStorage, so hydration skips these IDs instead of keeping them as user-written.
+export const RETIRED_SEED_IDS = ['art-3', 'art-5', 'art-6', 'c-4', 'c-5', 'c-6'];

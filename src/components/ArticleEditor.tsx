@@ -75,7 +75,7 @@ export const ArticleEditor: React.FC = () => {
   const [subtitle, setSubtitle] = useState(currentEditTarget?.subtitle || '');
   const [content, setContent] = useState(currentEditTarget?.content || '');
   const [category, setCategory] = useState(
-    currentEditTarget?.category || CATEGORIES[1] || 'Architecture & Design'
+    currentEditTarget?.category || CATEGORIES[1] || 'Veganism'
   );
   const [tagsInput, setTagsInput] = useState(currentEditTarget?.tags.join(', ') || '');
   const [coverImage, setCoverImage] = useState(
@@ -346,7 +346,7 @@ export const ArticleEditor: React.FC = () => {
 
                 <input
                   type="text"
-                  placeholder="Subtitle or brief premise (e.g. Why deep reading matters in our distracted era)..."
+                  placeholder="Subtitle or brief premise (e.g. Why small habits matter more than big resolutions)..."
                   value={subtitle}
                   onChange={(e) => setSubtitle(e.target.value)}
                   className="w-full font-serif italic text-lg sm:text-xl text-stone-600 placeholder:text-stone-300 bg-transparent border-none focus:outline-none"
@@ -378,7 +378,7 @@ export const ArticleEditor: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Architecture, Solitude, Books"
+                    placeholder="e.g. Plant-Based, Habits, Equality"
                     value={tagsInput}
                     onChange={(e) => setTagsInput(e.target.value)}
                     className="w-full bg-white border border-stone-200 rounded-md px-2.5 py-1.5 text-stone-800 placeholder:text-stone-400 focus:outline-none focus:ring-1 focus:ring-stone-400"
