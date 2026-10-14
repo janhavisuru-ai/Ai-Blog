@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { ArticleCard } from './ArticleCard';
 import {
@@ -16,6 +17,7 @@ import {
 } from 'lucide-react';
 
 export const ProfileView: React.FC = () => {
+  const { userId } = useParams<{ userId: string }>();
   const {
     users,
     currentUser,
@@ -26,7 +28,11 @@ export const ProfileView: React.FC = () => {
     openEditor,
   } = useBlog();
 
-  const author = users.find((u) => u.id === selectedProfileUserId) || currentUser || users[0];
+  const author =
+    (userId ? users.find((u) => u.id === userId || u.handle === userId || u.handle === `@${userId}`) : null) ||
+    (selectedProfileUserId ? users.find((u) => u.id === selectedProfileUserId) : null) ||
+    currentUser ||
+    users[0];
   const isOwnProfile = currentUser?.id === author.id;
   const isFollowing = currentUser?.followingUserIds.includes(author.id);
 
@@ -93,13 +99,13 @@ export const ProfileView: React.FC = () => {
                   <Settings className="w-3.5 h-3.5" />
                   <span>Edit Profile</span>
                 </button>
-                <button
-                  onClick={() => openEditor(null)}
+                <Link
+                  to="/write"
                   className="px-4 py-1.5 text-xs font-semibold text-white bg-stone-900 hover:bg-stone-800 rounded-lg transition-colors cursor-pointer flex items-center gap-1.5 shadow-xs"
                 >
                   <PenLine className="w-3.5 h-3.5" />
                   <span>New Story</span>
-                </button>
+                </Link>
               </>
             ) : (
               <button
@@ -234,12 +240,12 @@ export const ProfileView: React.FC = () => {
                 <div className="text-center py-16 bg-white/60 rounded-xl border border-dashed border-stone-300">
                   <p className="text-stone-500 text-sm">No stories published yet.</p>
                   {isOwnProfile && (
-                    <button
-                      onClick={() => openEditor(null)}
-                      className="mt-3 px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 cursor-pointer"
+                    <Link
+                      to="/write"
+                      className="inline-block mt-3 px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 cursor-pointer"
                     >
                       Write your first story
-                    </button>
+                    </Link>
                   )}
                 </div>
               ) : (
@@ -255,12 +261,12 @@ export const ProfileView: React.FC = () => {
               {authorDraftArticles.length === 0 ? (
                 <div className="text-center py-16 bg-white/60 rounded-xl border border-dashed border-stone-300">
                   <p className="text-stone-500 text-sm">You have no unpublished drafts.</p>
-                  <button
-                    onClick={() => openEditor(null)}
-                    className="mt-3 px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 cursor-pointer"
+                  <Link
+                    to="/write"
+                    className="inline-block mt-3 px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 cursor-pointer"
                   >
                     Start a new draft
-                  </button>
+                  </Link>
                 </div>
               ) : (
                 authorDraftArticles.map((draft) => (
@@ -283,12 +289,12 @@ export const ProfileView: React.FC = () => {
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
-                      <button
-                        onClick={() => openEditor(draft)}
+                      <Link
+                        to={`/editor/${draft.id}`}
                         className="px-3.5 py-1.5 text-xs font-medium text-stone-800 bg-stone-100 hover:bg-stone-200 rounded-lg transition-colors cursor-pointer"
                       >
                         Continue Editing
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 ))

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { HeroFeatured } from './HeroFeatured';
 import { ArticleCard } from './ArticleCard';
@@ -14,9 +15,7 @@ export const FeedView: React.FC = () => {
     setSelectedCategory,
     searchQuery,
     setSearchQuery,
-    openProfile,
     toggleFollow,
-    openEditor,
   } = useBlog();
 
   // Published articles only
@@ -153,13 +152,13 @@ export const FeedView: React.FC = () => {
             <p className="text-xs text-stone-300 leading-relaxed">
               Chronicle gives you a distraction-free space to write, publish, and build a dedicated readership.
             </p>
-            <button
-              onClick={() => openEditor(null)}
+            <Link
+              to="/write"
               className="w-full py-2 text-xs font-semibold text-stone-900 bg-white hover:bg-stone-100 rounded-lg transition-colors cursor-pointer flex items-center justify-center gap-1.5"
             >
               <PenLine className="w-3.5 h-3.5" />
               <span>Write an Article</span>
-            </button>
+            </Link>
           </div>
 
           {/* Curated Compact Stories */}
@@ -186,8 +185,8 @@ export const FeedView: React.FC = () => {
                 const isFollowing = currentUser?.followingUserIds.includes(author.id);
                 return (
                   <div key={author.id} className="flex items-center justify-between gap-3">
-                    <div
-                      onClick={() => openProfile(author.id)}
+                    <Link
+                      to={`/profile/${author.id}`}
                       className="flex items-center gap-2.5 cursor-pointer group min-w-0"
                     >
                       <img
@@ -201,7 +200,7 @@ export const FeedView: React.FC = () => {
                         </p>
                         <p className="text-[10px] text-stone-500 truncate">{author.role}</p>
                       </div>
-                    </div>
+                    </Link>
 
                     <button
                       onClick={() => toggleFollow(author.id)}

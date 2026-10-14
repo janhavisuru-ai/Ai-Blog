@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { CATEGORIES } from '../data/seedData';
 import {
@@ -40,23 +41,29 @@ const COVER_PRESETS = [
 ];
 
 export const ArticleEditor: React.FC = () => {
+  const { articleId } = useParams<{ articleId: string }>();
+  const navigate = useNavigate();
+
   const {
     currentUser,
+    articles,
     editingArticle,
     saveArticle,
-    openArticle,
-    setCurrentView,
   } = useBlog();
 
-  const [title, setTitle] = useState(editingArticle?.title || '');
-  const [subtitle, setSubtitle] = useState(editingArticle?.subtitle || '');
-  const [content, setContent] = useState(editingArticle?.content || '');
+  const currentEditTarget =
+    (articleId ? articles.find((a) => a.id === articleId || a.slug === articleId) : null) ||
+    editingArticle;
+
+  const [title, setTitle] = useState(currentEditTarget?.title || '');
+  const [subtitle, setSubtitle] = useState(currentEditTarget?.subtitle || '');
+  const [content, setContent] = useState(currentEditTarget?.content || '');
   const [category, setCategory] = useState(
-    editingArticle?.category || CATEGORIES[1] || 'Architecture & Design'
+    currentEditTarget?.category || CATEGORIES[1] || 'Architecture & Design'
   );
-  const [tagsInput, setTagsInput] = useState(editingArticle?.tags.join(', ') || '');
+  const [tagsInput, setTagsInput] = useState(currentEditTarget?.tags.join(', ') || '');
   const [coverImage, setCoverImage] = useState(
-    editingArticle?.coverImage || COVER_PRESETS[0].url
+    currentEditTarget?.coverImage || COVER_PRESETS[0].url
   );
   const [customImageUrl, setCustomImageUrl] = useState('');
   const [showImagePicker, setShowImagePicker] = useState(false);
@@ -64,17 +71,17 @@ export const ArticleEditor: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [feedbackMessage, setFeedbackMessage] = useState<string | null>(null);
 
-  // Sync if editingArticle changes
+  // Sync if currentEditTarget changes
   useEffect(() => {
-    if (editingArticle) {
-      setTitle(editingArticle.title);
-      setSubtitle(editingArticle.subtitle);
-      setContent(editingArticle.content);
-      setCategory(editingArticle.category);
-      setTagsInput(editingArticle.tags.join(', '));
-      setCoverImage(editingArticle.coverImage);
+    if (currentEditTarget) {
+      setTitle(currentEditTarget.title);
+      setSubtitle(currentEditTarget.subtitle);
+      setContent(currentEditTarget.content);
+      setCategory(currentEditTarget.category);
+      setTagsInput(currentEditTarget.tags.join(', '));
+      setCoverImage(currentEditTarget.coverImage);
     }
-  }, [editingArticle]);
+  }, [currentEditTarget]);
 
   const wordCount = content.trim() ? content.trim().split(/\s+/).length : 0;
   const estimatedReadTime = Math.max(1, Math.ceil(wordCount / 200));
@@ -116,7 +123,7 @@ export const ArticleEditor: React.FC = () => {
 
     try {
       const saved = saveArticle({
-        id: editingArticle?.id,
+        id: currentEditTarget?.id,
         title: title.trim(),
         subtitle: subtitle.trim() || 'A thoughtful exploration on Chronicle.',
         content: content.trim(),
@@ -131,9 +138,9 @@ export const ArticleEditor: React.FC = () => {
       setTimeout(() => {
         setIsSaving(false);
         if (!isDraft) {
-          openArticle(saved.id);
+          navigate(`/article/${encodeURIComponent(saved.slug || saved.id)}`);
         } else {
-          setCurrentView('feed');
+          navigate(currentUser ? `/profile/${currentUser.id}` : '/');
         }
       }, 700);
     } catch (e) {
@@ -148,13 +155,13 @@ export const ArticleEditor: React.FC = () => {
       {/* Top Editor Bar */}
       <header className="sticky top-16 z-30 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/70 px-4 sm:px-6 py-3">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <button
-            onClick={() => setCurrentView('feed')}
+          <Link
+            to="/"
             className="flex items-center gap-1.5 text-xs font-medium text-stone-600 hover:text-stone-900 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Cancel</span>
-          </button>
+          </Link>
 
           {/* Mode Switcher */}
           <div className="flex items-center gap-1 p-1 bg-stone-200/60 rounded-lg">

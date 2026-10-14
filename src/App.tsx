@@ -1,5 +1,6 @@
 import React from 'react';
-import { BlogProvider, useBlog } from './context/BlogContext';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { BlogProvider } from './context/BlogContext';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { FeedView } from './components/FeedView';
@@ -12,7 +13,8 @@ import { AuthModal } from './components/AuthModal';
 import { ShareModal } from './components/ShareModal';
 
 const AppContent: React.FC = () => {
-  const { currentView } = useBlog();
+  const location = useLocation();
+  const isEditor = location.pathname.startsWith('/write') || location.pathname.startsWith('/editor');
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-stone-900 font-sans selection:bg-amber-100 selection:text-amber-900">
@@ -20,17 +22,23 @@ const AppContent: React.FC = () => {
       <Header />
 
       {/* Main View Router */}
-      <div className="flex-1">
-        {currentView === 'feed' && <FeedView />}
-        {currentView === 'article' && <ArticleView />}
-        {currentView === 'editor' && <ArticleEditor />}
-        {currentView === 'profile' && <ProfileView />}
-        {currentView === 'reading-list' && <ReadingListView />}
-        {currentView === 'topics' && <TopicsView />}
-      </div>
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<FeedView />} />
+          <Route path="/stories" element={<FeedView />} />
+          <Route path="/article/:slug" element={<ArticleView />} />
+          <Route path="/topics" element={<TopicsView />} />
+          <Route path="/topics/:categoryName" element={<TopicsView />} />
+          <Route path="/reading-list" element={<ReadingListView />} />
+          <Route path="/write" element={<ArticleEditor />} />
+          <Route path="/editor/:articleId" element={<ArticleEditor />} />
+          <Route path="/profile/:userId" element={<ProfileView />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
 
       {/* Institutional Footer (hidden in editor view for distraction-free writing) */}
-      {currentView !== 'editor' && <Footer />}
+      {!isEditor && <Footer />}
 
       {/* Global Modals */}
       <AuthModal />
@@ -41,8 +49,10 @@ const AppContent: React.FC = () => {
 
 export default function App() {
   return (
-    <BlogProvider>
-      <AppContent />
-    </BlogProvider>
+    <BrowserRouter>
+      <BlogProvider>
+        <AppContent />
+      </BlogProvider>
+    </BrowserRouter>
   );
 }

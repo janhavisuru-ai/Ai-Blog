@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import { ArticleCard } from './ArticleCard';
 import { Bookmark, Compass } from 'lucide-react';
 
 export const ReadingListView: React.FC = () => {
-  const { currentUser, articles, setCurrentView, openAuthModal } = useBlog();
+  const { currentUser, articles, openAuthModal } = useBlog();
 
   if (!currentUser) {
     return (
@@ -47,13 +48,13 @@ export const ReadingListView: React.FC = () => {
           </p>
         </div>
 
-        <button
-          onClick={() => setCurrentView('feed')}
+        <Link
+          to="/"
           className="text-xs font-medium text-stone-600 hover:text-stone-900 flex items-center gap-1.5 cursor-pointer"
         >
           <Compass className="w-3.5 h-3.5" />
           <span>Explore More Stories</span>
-        </button>
+        </Link>
       </div>
 
       {bookmarkedArticles.length === 0 ? (
@@ -65,12 +66,12 @@ export const ReadingListView: React.FC = () => {
           <p className="text-xs text-stone-500 max-w-sm mx-auto mb-5">
             Click the bookmark icon on any article card or reading view to save stories here.
           </p>
-          <button
-            onClick={() => setCurrentView('feed')}
-            className="px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 cursor-pointer"
+          <Link
+            to="/"
+            className="inline-block px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 cursor-pointer"
           >
             Browse Today's Stories
-          </button>
+          </Link>
         </div>
       ) : (
         <div className="space-y-4">

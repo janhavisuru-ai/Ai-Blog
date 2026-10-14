@@ -1,19 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
-import { PenLine, Bookmark, Compass, User, LogOut, ChevronDown, Check } from 'lucide-react';
+import { PenLine, Bookmark, User, LogOut, ChevronDown, Check } from 'lucide-react';
 
 export const Header: React.FC = () => {
   const {
     currentUser,
-    currentView,
-    setCurrentView,
-    openEditor,
-    openProfile,
     openAuthModal,
     logout,
     users,
     login,
   } = useBlog();
+
+  const location = useLocation();
+  const pathname = location.pathname;
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [accountSwitchOpen, setAccountSwitchOpen] = useState(false);
@@ -47,59 +47,59 @@ export const Header: React.FC = () => {
 
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Zone 1: Single text element wordmark */}
-        <button
-          onClick={() => setCurrentView('feed')}
+        <Link
+          to="/"
           className="group text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-stone-400 rounded"
         >
           <span className="font-serif text-2xl font-semibold tracking-tight text-stone-900 group-hover:text-stone-700 transition-colors">
             Chronicle
           </span>
-        </button>
+        </Link>
 
         {/* Zone 2: Clean 4-6 text navigation links */}
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-stone-600">
-          <button
-            onClick={() => setCurrentView('feed')}
+          <Link
+            to="/"
             className={`cursor-pointer transition-colors hover:text-stone-950 ${
-              currentView === 'feed'
+              pathname === '/' || pathname === '/stories'
                 ? 'text-stone-950 font-semibold underline underline-offset-8 decoration-stone-400'
                 : 'text-stone-600'
             }`}
           >
             Stories
-          </button>
-          <button
-            onClick={() => setCurrentView('topics')}
+          </Link>
+          <Link
+            to="/topics"
             className={`cursor-pointer transition-colors hover:text-stone-950 ${
-              currentView === 'topics'
+              pathname.startsWith('/topics')
                 ? 'text-stone-950 font-semibold underline underline-offset-8 decoration-stone-400'
                 : 'text-stone-600'
             }`}
           >
             Topics
-          </button>
-          <button
-            onClick={() => setCurrentView('reading-list')}
+          </Link>
+          <Link
+            to="/reading-list"
             className={`cursor-pointer transition-colors hover:text-stone-950 flex items-center gap-1.5 ${
-              currentView === 'reading-list'
+              pathname.startsWith('/reading-list')
                 ? 'text-stone-950 font-semibold underline underline-offset-8 decoration-stone-400'
                 : 'text-stone-600'
             }`}
           >
             <Bookmark className="w-3.5 h-3.5" />
             <span>Reading List</span>
-          </button>
+          </Link>
         </nav>
 
         {/* Zone 3: 1-2 primary actions */}
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => openEditor(null)}
+          <Link
+            to="/write"
             className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-stone-800 bg-stone-100 hover:bg-stone-200 border border-stone-200 rounded-lg transition-colors cursor-pointer whitespace-nowrap"
           >
             <PenLine className="w-3.5 h-3.5 text-stone-600" />
             <span>Write</span>
-          </button>
+          </Link>
 
           {currentUser ? (
             <div className="relative" ref={dropdownRef}>
@@ -124,26 +124,22 @@ export const Header: React.FC = () => {
                   </div>
 
                   <div className="py-1">
-                    <button
-                      onClick={() => {
-                        openProfile(currentUser.id);
-                        setDropdownOpen(false);
-                      }}
+                    <Link
+                      to={`/profile/${currentUser.id}`}
+                      onClick={() => setDropdownOpen(false)}
                       className="w-full text-left px-4 py-2 text-stone-700 hover:bg-stone-50 flex items-center gap-2.5 transition-colors cursor-pointer"
                     >
                       <User className="w-4 h-4 text-stone-400" />
                       <span>My Profile & Articles</span>
-                    </button>
-                    <button
-                      onClick={() => {
-                        setCurrentView('reading-list');
-                        setDropdownOpen(false);
-                      }}
+                    </Link>
+                    <Link
+                      to="/reading-list"
+                      onClick={() => setDropdownOpen(false)}
                       className="w-full text-left px-4 py-2 text-stone-700 hover:bg-stone-50 flex items-center gap-2.5 transition-colors cursor-pointer"
                     >
                       <Bookmark className="w-4 h-4 text-stone-400" />
                       <span>Saved Stories ({currentUser.bookmarkedArticleIds.length})</span>
-                    </button>
+                    </Link>
                   </div>
 
                   <div className="border-t border-stone-100 pt-1">

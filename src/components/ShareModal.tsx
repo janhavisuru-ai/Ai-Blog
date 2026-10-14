@@ -19,7 +19,7 @@ export const ShareModal: React.FC = () => {
 
   // Use current window location or fallback
   const origin = typeof window !== 'undefined' ? window.location.origin : 'https://chronicle.journal';
-  const articleUrl = `${origin}/#story-${shareModalArticle.slug}`;
+  const articleUrl = `${origin}/article/${shareModalArticle.slug || shareModalArticle.id}`;
 
   const handleCopy = async () => {
     try {

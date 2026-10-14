@@ -1,23 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Article } from '../types';
 import { useBlog } from '../context/BlogContext';
-import { Bookmark, Sparkles, Clock } from 'lucide-react';
+import { Bookmark } from 'lucide-react';
 
 interface HeroFeaturedProps {
   article: Article;
 }
 
 export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ article }) => {
-  const { openArticle, openProfile, toggleBookmark, currentUser } = useBlog();
+  const { toggleBookmark, currentUser } = useBlog();
   const isBookmarked = currentUser?.bookmarkedArticleIds.includes(article.id);
+  const articleUrl = `/article/${article.slug || article.id}`;
 
   return (
     <section className="mb-14 border-b border-stone-200/80 pb-12">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Visual Slot - 7 cols */}
-        <div
-          onClick={() => openArticle(article.id)}
-          className="lg:col-span-7 group cursor-pointer overflow-hidden rounded-xl bg-stone-100 border border-stone-200/60 shadow-xs relative"
+        <Link
+          to={articleUrl}
+          className="lg:col-span-7 group cursor-pointer overflow-hidden rounded-xl bg-stone-100 border border-stone-200/60 shadow-xs relative block"
         >
           <div className="aspect-16/10 overflow-hidden relative">
             <img
@@ -33,25 +35,29 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ article }) => {
               {article.coverCaption}
             </p>
           )}
-        </div>
+        </Link>
 
         {/* Story Prose Slot - 5 cols */}
         <div className="lg:col-span-5 flex flex-col justify-center space-y-4">
           {/* Metadata - Zero-pill clean unboxed text */}
           <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-stone-500 font-sans">
-            <span className="font-semibold text-stone-700">{article.category}</span>
+            <Link
+              to={`/topics/${encodeURIComponent(article.category)}`}
+              className="font-semibold text-stone-700 hover:underline"
+            >
+              {article.category}
+            </Link>
             <span aria-hidden="true">·</span>
             <span>Featured Essay</span>
             <span aria-hidden="true">·</span>
             <span>{article.readTime} min read</span>
           </div>
 
-          <h1
-            onClick={() => openArticle(article.id)}
-            className="font-serif text-3xl sm:text-4xl lg:text-[2.5rem] leading-[1.18] font-medium text-stone-900 hover:text-stone-700 transition-colors cursor-pointer text-balance"
-          >
-            {article.title}
-          </h1>
+          <Link to={articleUrl} className="block group">
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-[2.5rem] leading-[1.18] font-medium text-stone-900 group-hover:text-stone-700 transition-colors text-balance">
+              {article.title}
+            </h1>
+          </Link>
 
           <p className="text-stone-600 text-base leading-relaxed line-clamp-3">
             {article.subtitle}
@@ -59,8 +65,8 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ article }) => {
 
           <div className="pt-2 flex items-center justify-between border-t border-stone-100">
             {/* Author */}
-            <div
-              onClick={() => openProfile(article.author.id)}
+            <Link
+              to={`/profile/${article.author.id}`}
               className="flex items-center gap-3 group/author cursor-pointer"
             >
               <img
@@ -74,12 +80,13 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ article }) => {
                 </p>
                 <p className="text-xs text-stone-500">{article.author.role}</p>
               </div>
-            </div>
+            </Link>
 
             {/* Actions */}
             <div className="flex items-center gap-3">
               <button
                 onClick={(e) => {
+                  e.preventDefault();
                   e.stopPropagation();
                   toggleBookmark(article.id);
                 }}
@@ -94,12 +101,12 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ article }) => {
                 <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-current' : ''}`} />
               </button>
 
-              <button
-                onClick={() => openArticle(article.id)}
-                className="px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 transition-colors cursor-pointer"
+              <Link
+                to={articleUrl}
+                className="px-4 py-2 text-xs font-semibold text-white bg-stone-900 rounded-lg hover:bg-stone-800 transition-colors cursor-pointer inline-block"
               >
                 Read Story
-              </button>
+              </Link>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Article, User, Comment, ViewMode, FontPreference, FontSizePreference } from '../types';
 import { SEED_USERS, SEED_ARTICLES, SEED_COMMENTS } from '../data/seedData';
 
@@ -115,8 +116,10 @@ export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   });
 
+  const navigate = useNavigate();
+
   // Navigation State
-  const [currentView, setCurrentView] = useState<ViewMode>('feed');
+  const [currentView, setCurrentViewState] = useState<ViewMode>('feed');
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(null);
   const [selectedProfileUserId, setSelectedProfileUserId] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('All Topics');
@@ -184,19 +187,32 @@ export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, [fontSizePreference]);
 
   // Actions
-  const openArticle = (articleId: string) => {
-    setSelectedArticleId(articleId);
-    setCurrentView('article');
+  const setCurrentView = (view: ViewMode) => {
+    setCurrentViewState(view);
+    if (view === 'feed') navigate('/');
+    else if (view === 'topics') navigate('/topics');
+    else if (view === 'reading-list') navigate('/reading-list');
+    else if (view === 'editor') navigate('/write');
+  };
+
+  const openArticle = (slugOrId: string) => {
+    const target = articles.find((a) => a.id === slugOrId || a.slug === slugOrId);
+    const id = target?.id || slugOrId;
+    const slug = target?.slug || slugOrId;
+    setSelectedArticleId(id);
+    setCurrentViewState('article');
     // Increment view count gently
     setArticles((prev) =>
-      prev.map((a) => (a.id === articleId ? { ...a, views: a.views + 1 } : a))
+      prev.map((a) => (a.id === id ? { ...a, views: a.views + 1 } : a))
     );
+    navigate(`/article/${encodeURIComponent(slug)}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const openProfile = (userId: string) => {
     setSelectedProfileUserId(userId);
-    setCurrentView('profile');
+    setCurrentViewState('profile');
+    navigate(`/profile/${encodeURIComponent(userId)}`);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -206,7 +222,12 @@ export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children
       return;
     }
     setEditingArticle(articleToEdit || null);
-    setCurrentView('editor');
+    setCurrentViewState('editor');
+    if (articleToEdit?.id) {
+      navigate(`/editor/${encodeURIComponent(articleToEdit.id)}`);
+    } else {
+      navigate('/write');
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 

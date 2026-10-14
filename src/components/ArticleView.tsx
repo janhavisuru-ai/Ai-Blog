@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useBlog } from '../context/BlogContext';
 import {
   ArrowLeft,
@@ -18,6 +19,9 @@ import {
 } from 'lucide-react';
 
 export const ArticleView: React.FC = () => {
+  const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+
   const {
     articles,
     selectedArticleId,
@@ -39,7 +43,15 @@ export const ArticleView: React.FC = () => {
     deleteArticle,
   } = useBlog();
 
-  const article = articles.find((a) => a.id === selectedArticleId);
+  const article = articles.find(
+    (a) => a.slug === slug || a.id === slug || (selectedArticleId && a.id === selectedArticleId)
+  );
+
+  useEffect(() => {
+    if (article) {
+      document.title = `${article.title} — Chronicle`;
+    }
+  }, [article]);
 
   // Scroll Progress
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -92,12 +104,12 @@ export const ArticleView: React.FC = () => {
     return (
       <div className="mx-auto max-w-3xl px-4 py-20 text-center">
         <p className="text-stone-600">The requested article could not be found.</p>
-        <button
-          onClick={() => setCurrentView('feed')}
-          className="mt-4 px-4 py-2 text-sm font-medium text-stone-900 bg-stone-100 rounded-lg hover:bg-stone-200"
+        <Link
+          to="/"
+          className="inline-block mt-4 px-4 py-2 text-sm font-medium text-stone-900 bg-stone-100 rounded-lg hover:bg-stone-200"
         >
           Return to Feed
-        </button>
+        </Link>
       </div>
     );
   }
@@ -268,13 +280,13 @@ export const ArticleView: React.FC = () => {
       {/* Floating Reading Utility Header */}
       <div className="sticky top-16 z-30 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200/60 py-2.5 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <button
-            onClick={() => setCurrentView('feed')}
+          <Link
+            to="/"
             className="flex items-center gap-1.5 text-xs font-medium text-stone-600 hover:text-stone-900 transition-colors cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Stories</span>
-          </button>
+          </Link>
 
           <div className="flex items-center gap-3">
             {/* Audio Reader */}
@@ -385,17 +397,18 @@ export const ArticleView: React.FC = () => {
             {/* Author Controls */}
             {isAuthor && (
               <div className="flex items-center gap-1 pl-2 border-l border-stone-200">
-                <button
-                  onClick={() => openEditor(article)}
+                <Link
+                  to={`/editor/${article.id}`}
                   className="p-1.5 text-stone-600 hover:text-stone-900 hover:bg-stone-100 rounded-md cursor-pointer"
                   title="Edit this story"
                 >
                   <Edit3 className="w-4 h-4" />
-                </button>
+                </Link>
                 <button
                   onClick={() => {
                     if (window.confirm('Are you sure you want to delete this article?')) {
                       deleteArticle(article.id);
+                      navigate('/');
                     }
                   }}
                   className="p-1.5 text-stone-400 hover:text-rose-600 hover:bg-rose-50 rounded-md cursor-pointer"
@@ -431,8 +444,8 @@ export const ArticleView: React.FC = () => {
 
         {/* Author Byline Ribbon */}
         <div className="flex items-center justify-between border-y border-stone-200/80 py-4 mb-8">
-          <div
-            onClick={() => openProfile(article.author.id)}
+          <Link
+            to={`/profile/${article.author.id}`}
             className="flex items-center gap-3.5 cursor-pointer group"
           >
             <img
@@ -449,7 +462,7 @@ export const ArticleView: React.FC = () => {
               </div>
               <p className="text-xs text-stone-500">{article.author.role}</p>
             </div>
-          </div>
+          </Link>
 
           {!isAuthor && (
             <button
@@ -566,8 +579,8 @@ export const ArticleView: React.FC = () => {
         {/* Author Bio Card */}
         <div className="max-w-2xl mx-auto mb-16 p-6 rounded-2xl bg-stone-100/70 border border-stone-200">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div
-              onClick={() => openProfile(article.author.id)}
+            <Link
+              to={`/profile/${article.author.id}`}
               className="flex items-center gap-4 cursor-pointer group"
             >
               <img
@@ -582,7 +595,7 @@ export const ArticleView: React.FC = () => {
                 <p className="text-xs text-stone-600">{article.author.role}</p>
                 <p className="text-xs text-stone-500 mt-1 line-clamp-2">{article.author.bio}</p>
               </div>
-            </div>
+            </Link>
 
             {!isAuthor && (
               <button
