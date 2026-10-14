@@ -235,6 +235,26 @@ export const ArticleView: React.FC = () => {
         );
       }
 
+      // Markdown Image Figure
+      const imgMatch = trimmed.match(/^!\[(.*?)\]\((.*?)\)$/);
+      if (imgMatch) {
+        return (
+          <figure key={idx} className="my-10 overflow-hidden rounded-xl bg-stone-100 border border-stone-200/70 shadow-xs">
+            <img
+              src={imgMatch[2]}
+              alt={imgMatch[1]}
+              referrerPolicy="no-referrer"
+              className="w-full aspect-16/9 object-cover"
+            />
+            {imgMatch[1] && (
+              <figcaption className="px-4 py-2.5 text-xs font-serif text-stone-500 italic bg-stone-50/80 border-t border-stone-200/50">
+                {imgMatch[1]}
+              </figcaption>
+            )}
+          </figure>
+        );
+      }
+
       // Regular Paragraph with optional initial drop cap on first paragraph
       const isFirstParagraph = hasDropCap;
       if (isFirstParagraph) hasDropCap = false;

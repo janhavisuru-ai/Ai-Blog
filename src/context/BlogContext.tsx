@@ -73,14 +73,68 @@ const STORAGE_KEYS = {
   FONT_SIZE: 'chronicle_font_size_v1',
 };
 
+const sanitizeUser = (u: any): User => ({
+  id: String(u?.id || `user-${Date.now()}`),
+  name: String(u?.name || 'Anonymous'),
+  handle: String(u?.handle || '@anonymous'),
+  email: String(u?.email || 'user@chronicle.journal'),
+  avatar: String(u?.avatar || 'https://api.dicebear.com/7.x/notionists/svg?seed=Reader'),
+  bio: String(u?.bio || ''),
+  role: String(u?.role || 'Reader'),
+  location: u?.location ? String(u.location) : undefined,
+  website: u?.website ? String(u.website) : undefined,
+  twitter: u?.twitter ? String(u.twitter) : undefined,
+  joinedDate: String(u?.joinedDate || 'Recently'),
+  followersCount: Number.isFinite(u?.followersCount) ? u.followersCount : 0,
+  followingCount: Number.isFinite(u?.followingCount) ? u.followingCount : 0,
+  followingUserIds: Array.isArray(u?.followingUserIds) ? u.followingUserIds : [],
+  bookmarkedArticleIds: Array.isArray(u?.bookmarkedArticleIds) ? u.bookmarkedArticleIds : [],
+});
+
+const sanitizeArticle = (a: any): Article => ({
+  id: String(a?.id || `art-${Date.now()}`),
+  slug: String(a?.slug || `story-${Date.now()}`),
+  title: String(a?.title || 'Untitled Story'),
+  subtitle: String(a?.subtitle || ''),
+  content: String(a?.content || ''),
+  coverImage: String(a?.coverImage || '/src/assets/images/hero_editorial_spaces_1791176660658.jpg'),
+  coverImageAlt: String(a?.coverImageAlt || a?.title || 'Article cover'),
+  coverCaption: a?.coverCaption ? String(a.coverCaption) : undefined,
+  category: String(a?.category || 'General'),
+  tags: Array.isArray(a?.tags) ? a.tags.map(String) : [],
+  authorId: String(a?.authorId || 'user-1'),
+  author: {
+    id: String(a?.author?.id || 'user-1'),
+    name: String(a?.author?.name || 'Elena Rostova'),
+    handle: String(a?.author?.handle || '@elenarostova'),
+    avatar: String(a?.author?.avatar || 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena'),
+    role: String(a?.author?.role || 'Contributing Author'),
+    bio: String(a?.author?.bio || ''),
+  },
+  publishedAt: String(a?.publishedAt || 'Recently'),
+  readTime: Number.isFinite(a?.readTime) && a.readTime > 0 ? a.readTime : 4,
+  claps: Number.isFinite(a?.claps) ? a.claps : 0,
+  clappedBy: a?.clappedBy && typeof a.clappedBy === 'object' ? a.clappedBy : {},
+  views: Number.isFinite(a?.views) ? a.views : 0,
+  isDraft: Boolean(a?.isDraft),
+  isFeatured: Boolean(a?.isFeatured),
+  commentsCount: Number.isFinite(a?.commentsCount) ? a.commentsCount : 0,
+});
+
 export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Hydrate Users
   const [users, setUsers] = useState<User[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.USERS);
-      return stored ? JSON.parse(stored) : SEED_USERS;
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map(sanitizeUser);
+        }
+      }
+      return SEED_USERS.map(sanitizeUser);
     } catch {
-      return SEED_USERS;
+      return SEED_USERS.map(sanitizeUser);
     }
   });
 
@@ -90,27 +144,57 @@ export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const storedId = localStorage.getItem(STORAGE_KEYS.CURRENT_USER_ID);
       const list = users.length ? users : SEED_USERS;
       const found = list.find((u) => u.id === (storedId || 'user-1'));
-      return found || list[0] || null;
+      return found ? sanitizeUser(found) : sanitizeUser(list[0]);
     } catch {
-      return SEED_USERS[0] || null;
+      return sanitizeUser(SEED_USERS[0]);
     }
   });
 
-  // Hydrate Articles
+  // Hydrate Articles with latest seed imagery and articles
   const [articles, setArticles] = useState<Article[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.ARTICLES);
-      return stored ? JSON.parse(stored) : SEED_ARTICLES;
+      if (!stored) return SEED_ARTICLES.map(sanitizeArticle);
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed)) return SEED_ARTICLES.map(sanitizeArticle);
+
+      // Merge: preserve user-written articles while updating seed articles with latest content and figures
+      const userCreated = parsed
+        .filter((a) => !SEED_ARTICLES.some((s) => s.id === a?.id))
+        .map(sanitizeArticle);
+
+      const updatedSeeds = SEED_ARTICLES.map((seed) => {
+        const existing = parsed.find((p) => p?.id === seed.id);
+        const existingClaps = Number.isFinite(existing?.claps) ? existing.claps : 0;
+        const existingViews = Number.isFinite(existing?.views) ? existing.views : 0;
+        const existingClappedBy =
+          existing?.clappedBy && typeof existing.clappedBy === 'object'
+            ? existing.clappedBy
+            : {};
+
+        return sanitizeArticle({
+          ...seed,
+          claps: Math.max(seed.claps, existingClaps),
+          views: Math.max(seed.views, existingViews),
+          clappedBy: { ...seed.clappedBy, ...existingClappedBy },
+        });
+      });
+
+      return [...updatedSeeds, ...userCreated];
     } catch {
-      return SEED_ARTICLES;
+      return SEED_ARTICLES.map(sanitizeArticle);
     }
   });
 
-  // Hydrate Comments
+  // Hydrate Comments with latest seed comments
   const [comments, setComments] = useState<Comment[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.COMMENTS);
-      return stored ? JSON.parse(stored) : SEED_COMMENTS;
+      if (!stored) return SEED_COMMENTS;
+      const parsed = JSON.parse(stored);
+      if (!Array.isArray(parsed)) return SEED_COMMENTS;
+      const userComments = parsed.filter((c) => !SEED_COMMENTS.some((s) => s.id === c?.id));
+      return [...SEED_COMMENTS, ...userComments];
     } catch {
       return SEED_COMMENTS;
     }

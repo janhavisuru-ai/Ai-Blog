@@ -38,6 +38,14 @@ const COVER_PRESETS = [
     title: 'Letterpress & Type',
     url: '/src/assets/images/cover_typography_ink_1791176701904.jpg',
   },
+  {
+    title: 'Philosophical Reflection',
+    url: '/src/assets/images/cover_philosophy_memory_1791961016425.jpg',
+  },
+  {
+    title: 'The Nocturnal City',
+    url: '/src/assets/images/cover_nocturnal_urbanism_1791961017486.jpg',
+  },
 ];
 
 export const ArticleEditor: React.FC = () => {

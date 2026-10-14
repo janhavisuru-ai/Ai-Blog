@@ -16,7 +16,7 @@ export const SEED_USERS: User[] = [
     followersCount: 1420,
     followingCount: 88,
     followingUserIds: ['user-2'],
-    bookmarkedArticleIds: ['art-2', 'art-4'],
+    bookmarkedArticleIds: ['art-2', 'art-4', 'art-5'],
   },
   {
     id: 'user-2',
@@ -33,7 +33,7 @@ export const SEED_USERS: User[] = [
     followersCount: 890,
     followingCount: 142,
     followingUserIds: ['user-1', 'user-3'],
-    bookmarkedArticleIds: ['art-1'],
+    bookmarkedArticleIds: ['art-1', 'art-6'],
   },
   {
     id: 'user-3',
@@ -48,7 +48,7 @@ export const SEED_USERS: User[] = [
     followersCount: 2150,
     followingCount: 310,
     followingUserIds: ['user-1'],
-    bookmarkedArticleIds: ['art-1', 'art-3'],
+    bookmarkedArticleIds: ['art-1', 'art-3', 'art-5'],
   },
   {
     id: 'user-4',
@@ -63,7 +63,7 @@ export const SEED_USERS: User[] = [
     followersCount: 1740,
     followingCount: 95,
     followingUserIds: ['user-2'],
-    bookmarkedArticleIds: ['art-1'],
+    bookmarkedArticleIds: ['art-1', 'art-6'],
   },
 ];
 
@@ -109,6 +109,8 @@ Our digital interfaces lack this spatial graduation. We flip in eight millisecon
 
 ### Designing Digital Courtyards
 
+![Figure 2. Light and quiet stone courtyards in contemplative monastic architecture](/src/assets/images/figure_monastic_courtyard_1791961018190.jpg)
+
 What would it mean to construct an interface governed by the logic of stone and timber rather than ticker tape?
 
 1. **Deliberate Latency**: Introducing friction into dispatch. The beauty of physical letters was partly the knowledge that hours passed between writing, sealing, and reading.
@@ -148,6 +150,8 @@ If the first forty years of computing were dedicated to speed, interconnectivity
 Within twenty-six hours, the organism had deployed a network of tubular veins linking the food sources. When transport engineers compared the organism's biological vascular network with the Tokyo subway rail system—designed over decades by teams of elite civil engineers—they found them almost topologically identical.
 
 ### Redundancy Without Bureaucracy
+
+![Figure 2. Subterranean mycelium network exhibiting non-centralized topological routing](/src/assets/images/figure_mycelium_micro_1791961017872.jpg)
 
 How does an organism without a central nervous system, without a supervisor, and without a global map solve NP-hard routing problems with such effortless grace?
 
@@ -249,6 +253,90 @@ Classical typography survives because it is grounded in optical physiology rathe
 
 When building web software, resist the temptation to decorate every empty quadrant with translucent pill capsules and floating badges. Let the prose speak with the gravitas of lead type on warm paper.`,
   },
+  {
+    id: 'art-5',
+    slug: 'the-ethics-of-artificial-memory',
+    title: 'The Ethics of Artificial Memory: What Happens When We Can Never Forget?',
+    subtitle: 'Exploring the cognitive necessity of forgetting, digital permanence, and the human soul.',
+    category: 'Philosophy',
+    tags: ['Philosophy', 'Memory', 'Consciousness', 'Ethics'],
+    authorId: 'user-1',
+    author: {
+      id: 'user-1',
+      name: 'Elena Rostova',
+      handle: '@elenarostova',
+      avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena&backgroundColor=f5ebe0',
+      role: 'Contributing Editor',
+      bio: 'Architectural theorist and cultural critic.',
+    },
+    coverImage: '/src/assets/images/cover_philosophy_memory_1791961016425.jpg',
+    coverImageAlt: 'Classical marble statue with translucent optical prisms in warm library light',
+    coverCaption: 'Figure 5. The refraction of memory and human cognition through technological prisms.',
+    publishedAt: 'October 3, 2026',
+    readTime: 6,
+    claps: 295,
+    clappedBy: { 'user-3': 18, 'user-2': 24 },
+    views: 3840,
+    isDraft: false,
+    commentsCount: 2,
+    content: `Jorge Luis Borges once conceived of Funes the Memorious—a youth from Fray Bentos who, following a fall from a horse, lost the capacity to forget. Funes remembered not only every tree on every hill, but every leaf on every branch at every distinct hour of the afternoon.
+
+Yet Borges made a devastating observation: Funes was virtually incapable of profound thought. For to think is to ignore differences, to generalize, to abstract. In the over-stocked world of Funes, there was only immediate detail.
+
+### The Gentle Mercy of Erosion
+
+For millennia, human civilization developed within the grace of organic oblivion. Memories softened around the edges. Youthful humiliations faded into fond anecdotes. An argument between neighbors was slowly smoothed over by the sedimentation of seasons.
+
+Today, our recording devices preserve every sentence, every casual remark, every timestamped transgression in cold crystalline storage. We have created a technological substrate that refuses to let the past recede into gentle shadow.
+
+> "Forgetting is not an error in biological storage; it is the very engine of psychological synthesis."
+
+### Designing for Oblivion
+
+If we wish to build humane systems, we must design software that knows how to let go. We must build into our databases the digital equivalent of autumn leaves—data that degrades gracefully, records that lose their sharp punitive resolution over time, and spaces where forgiveness is architecturally native rather than legally demanded.`,
+  },
+  {
+    id: 'art-6',
+    slug: 'the-nocturnal-city-quiet-imagination',
+    title: 'The Nocturnal City: How Urban Darkness Cultivates Human Imagination',
+    subtitle: 'Why modern cities must protect the night from artificial perpetual daylight to restore psychological wonder.',
+    category: 'Urbanism',
+    tags: ['Urbanism', 'Architecture', 'Night', 'Psychology'],
+    authorId: 'user-3',
+    author: {
+      id: 'user-3',
+      name: 'Sora Takahashi',
+      handle: '@soratakahashi',
+      avatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sora&backgroundColor=fae1dd',
+      role: 'Essayist & Bibliophile',
+      bio: 'Book collector, essayist, and founder of Kyoto Slow Reading.',
+    },
+    coverImage: '/src/assets/images/cover_nocturnal_urbanism_1791961017486.jpg',
+    coverImageAlt: 'Quiet European cobblestone street at midnight illuminated by warm lanterns',
+    coverCaption: 'Figure 6. The quiet dignity of midnight streets in European old towns.',
+    publishedAt: 'October 6, 2026',
+    readTime: 5,
+    claps: 367,
+    clappedBy: { 'user-1': 30, 'user-4': 22 },
+    views: 4120,
+    isDraft: false,
+    commentsCount: 3,
+    content: `Stand at 2:00 AM on the wet cobblestones of an ancient quarter when the shops are shuttered and the cars have vanished into subterranean garages. The buildings appear taller, their pediments reaching into an ink-black sky.
+
+In the dark, the city ceases to be a machine for commerce and becomes a theater for the interior life.
+
+### The Curse of Perpetual Noon
+
+Since the mass adoption of ultra-bright cold LED streetlights, our metropolitan regions have banished the twilight. We have colonized the midnight hours with high-lumen glare designed to eliminate any pocket of mystery.
+
+Yet psychologists and urban poets alike have long recognized that darkness is the companion of interiority:
+
+- **Acoustic Softening**: At night, sound carries differently. Footsteps strike the stone with resonance, making the walker aware of their own cadence.
+- **The Threshold of the Visible**: When you cannot see every millimeter of a facade, your imagination fills the void. The gargoyle is sketched in the mind rather than broadcast in 4K.
+- **Reclaiming the Celestial Canopy**: A city that cannot see the stars has forgotten its place in the cosmos.
+
+To redesign the nocturnal city is not to invite danger; it is to replace harsh illumination with warm, directed pools of golden light—inviting conversation, contemplation, and restorative silence.`,
+  },
 ];
 
 export const SEED_COMMENTS: Comment[] = [
@@ -299,6 +387,30 @@ export const SEED_COMMENTS: Comment[] = [
     createdAt: '3 days ago',
     likes: 22,
     likedBy: ['user-3', 'user-2'],
+  },
+  {
+    id: 'c-5',
+    articleId: 'art-5',
+    authorId: 'user-3',
+    authorName: 'Sora Takahashi',
+    authorHandle: '@soratakahashi',
+    authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Sora&backgroundColor=fae1dd',
+    content: 'Borges’ Funes is the patron saint of our digital dilemma. This distinction between archiving data and genuine human synthesis is profound.',
+    createdAt: '1 day ago',
+    likes: 16,
+    likedBy: ['user-1', 'user-4'],
+  },
+  {
+    id: 'c-6',
+    articleId: 'art-6',
+    authorId: 'user-1',
+    authorName: 'Elena Rostova',
+    authorHandle: '@elenarostova',
+    authorAvatar: 'https://api.dicebear.com/7.x/notionists/svg?seed=Elena&backgroundColor=f5ebe0',
+    content: 'Lighting design is the most neglected realm of contemporary urbanism. Cold 5000K LEDs have stripped our streets of romance and twilight contemplation.',
+    createdAt: '18 hours ago',
+    likes: 21,
+    likedBy: ['user-3'],
   },
 ];
 
