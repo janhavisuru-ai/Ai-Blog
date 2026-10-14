@@ -1,4 +1,14 @@
 import { Article, User, Comment } from '../types';
+import {
+  heroEditorialSpaces,
+  coverNeuralNature,
+  coverKyotoSolitude,
+  coverTypographyInk,
+  coverPhilosophyMemory,
+  coverNocturnalUrbanism,
+  figureMonasticCourtyard,
+  figureMyceliumMicro,
+} from '../assets/images';
 
 export const SEED_USERS: User[] = [
   {
@@ -84,7 +94,7 @@ export const SEED_ARTICLES: Article[] = [
       role: 'Contributing Editor',
       bio: 'Architectural theorist and cultural critic.',
     },
-    coverImage: '/src/assets/images/hero_editorial_spaces_1791176660658.jpg',
+    coverImage: heroEditorialSpaces,
     coverImageAlt: 'Minimalist library pavilion with morning sunlight casting geometric shadows',
     coverCaption: 'Figure 1. Light and void in contemplative civic spaces. Photographed at the Serpentine Pavilion.',
     publishedAt: 'October 1, 2026',
@@ -109,7 +119,7 @@ Our digital interfaces lack this spatial graduation. We flip in eight millisecon
 
 ### Designing Digital Courtyards
 
-![Figure 2. Light and quiet stone courtyards in contemplative monastic architecture](/src/assets/images/figure_monastic_courtyard_1791961018190.jpg)
+![Figure 2. Light and quiet stone courtyards in contemplative monastic architecture](${figureMonasticCourtyard})
 
 What would it mean to construct an interface governed by the logic of stone and timber rather than ticker tape?
 
@@ -135,7 +145,7 @@ If the first forty years of computing were dedicated to speed, interconnectivity
       role: 'Research Fellow',
       bio: 'Systems biologist and research fellow.',
     },
-    coverImage: '/src/assets/images/cover_neural_nature_1791176673263.jpg',
+    coverImage: coverNeuralNature,
     coverImageAlt: 'Bioluminescent fungal mycelium and optic light fibers in forest floor',
     coverCaption: 'Subterranean hyphal networks displaying adaptive resource routing.',
     publishedAt: 'September 28, 2026',
@@ -151,7 +161,7 @@ Within twenty-six hours, the organism had deployed a network of tubular veins li
 
 ### Redundancy Without Bureaucracy
 
-![Figure 2. Subterranean mycelium network exhibiting non-centralized topological routing](/src/assets/images/figure_mycelium_micro_1791961017872.jpg)
+![Figure 2. Subterranean mycelium network exhibiting non-centralized topological routing](${figureMyceliumMicro})
 
 How does an organism without a central nervous system, without a supervisor, and without a global map solve NP-hard routing problems with such effortless grace?
 
@@ -183,7 +193,7 @@ Our modern distributed server architectures, by contrast, frequently rely on fra
       role: 'Essayist & Bibliophile',
       bio: 'Book collector, essayist, and founder of Kyoto Slow Reading.',
     },
-    coverImage: '/src/assets/images/cover_kyoto_solitude_1791176687903.jpg',
+    coverImage: coverKyotoSolitude,
     coverImageAlt: 'Rain-streaked bookstore window in Kyoto at dusk with warm interior glow',
     coverCaption: 'Figure 3. Solitary hours among secondhand volumes, Kyoto.',
     publishedAt: 'September 24, 2026',
@@ -229,7 +239,7 @@ When you read a dense paragraph of Virginia Woolf or Montaigne, you are forced t
       role: 'Typographer & Designer',
       bio: 'Typographer, book designer, and interface craftsman.',
     },
-    coverImage: '/src/assets/images/cover_typography_ink_1791176701904.jpg',
+    coverImage: coverTypographyInk,
     coverImageAlt: 'Vintage metal letterpress movable type blocks coated in dark ink',
     coverCaption: 'Figure 4. Lead and antimony type matrices at the Whittington Press.',
     publishedAt: 'September 19, 2026',
@@ -269,7 +279,7 @@ When building web software, resist the temptation to decorate every empty quadra
       role: 'Contributing Editor',
       bio: 'Architectural theorist and cultural critic.',
     },
-    coverImage: '/src/assets/images/cover_philosophy_memory_1791961016425.jpg',
+    coverImage: coverPhilosophyMemory,
     coverImageAlt: 'Classical marble statue with translucent optical prisms in warm library light',
     coverCaption: 'Figure 5. The refraction of memory and human cognition through technological prisms.',
     publishedAt: 'October 3, 2026',
@@ -311,7 +321,7 @@ If we wish to build humane systems, we must design software that knows how to le
       role: 'Essayist & Bibliophile',
       bio: 'Book collector, essayist, and founder of Kyoto Slow Reading.',
     },
-    coverImage: '/src/assets/images/cover_nocturnal_urbanism_1791961017486.jpg',
+    coverImage: coverNocturnalUrbanism,
     coverImageAlt: 'Quiet European cobblestone street at midnight illuminated by warm lanterns',
     coverCaption: 'Figure 6. The quiet dignity of midnight streets in European old towns.',
     publishedAt: 'October 6, 2026',

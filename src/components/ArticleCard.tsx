@@ -114,6 +114,12 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, variant = 'ca
             src={article.coverImage}
             alt={article.coverImageAlt}
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (target.src.includes('/src/assets/images/')) {
+                target.src = target.src.replace('/src/assets/images/', '/images/');
+              }
+            }}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-103"
           />
         </Link>
@@ -131,6 +137,12 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({ article, variant = 'ca
             src={article.coverImage}
             alt={article.coverImageAlt}
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (target.src.includes('/src/assets/images/')) {
+                target.src = target.src.replace('/src/assets/images/', '/images/');
+              }
+            }}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-102"
           />
         </div>

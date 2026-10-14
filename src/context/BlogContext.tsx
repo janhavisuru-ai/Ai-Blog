@@ -2,6 +2,14 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Article, User, Comment, ViewMode, FontPreference, FontSizePreference } from '../types';
 import { SEED_USERS, SEED_ARTICLES, SEED_COMMENTS } from '../data/seedData';
+import {
+  heroEditorialSpaces,
+  coverNeuralNature,
+  coverKyotoSolitude,
+  coverTypographyInk,
+  coverPhilosophyMemory,
+  coverNocturnalUrbanism,
+} from '../assets/images';
 
 interface BlogContextType {
   currentUser: User | null;
@@ -73,6 +81,17 @@ const STORAGE_KEYS = {
   FONT_SIZE: 'chronicle_font_size_v1',
 };
 
+const resolveCoverImage = (url: string | undefined): string => {
+  if (!url) return heroEditorialSpaces;
+  if (url.includes('hero_editorial_spaces')) return heroEditorialSpaces;
+  if (url.includes('cover_neural_nature')) return coverNeuralNature;
+  if (url.includes('cover_kyoto_solitude')) return coverKyotoSolitude;
+  if (url.includes('cover_typography_ink')) return coverTypographyInk;
+  if (url.includes('cover_philosophy_memory')) return coverPhilosophyMemory;
+  if (url.includes('cover_nocturnal_urbanism')) return coverNocturnalUrbanism;
+  return url;
+};
+
 const sanitizeUser = (u: any): User => ({
   id: String(u?.id || `user-${Date.now()}`),
   name: String(u?.name || 'Anonymous'),
@@ -97,7 +116,7 @@ const sanitizeArticle = (a: any): Article => ({
   title: String(a?.title || 'Untitled Story'),
   subtitle: String(a?.subtitle || ''),
   content: String(a?.content || ''),
-  coverImage: String(a?.coverImage || '/src/assets/images/hero_editorial_spaces_1791176660658.jpg'),
+  coverImage: resolveCoverImage(a?.coverImage),
   coverImageAlt: String(a?.coverImageAlt || a?.title || 'Article cover'),
   coverCaption: a?.coverCaption ? String(a.coverCaption) : undefined,
   category: String(a?.category || 'General'),

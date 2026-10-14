@@ -26,6 +26,12 @@ export const HeroFeatured: React.FC<HeroFeaturedProps> = ({ article }) => {
               src={article.coverImage}
               alt={article.coverImageAlt}
               referrerPolicy="no-referrer"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src.includes('/src/assets/images/')) {
+                  target.src = target.src.replace('/src/assets/images/', '/images/');
+                }
+              }}
               className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-102"
             />
             <div className="absolute inset-0 bg-stone-900/5 group-hover:bg-transparent transition-colors" />

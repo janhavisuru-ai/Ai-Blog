@@ -244,6 +244,12 @@ export const ArticleView: React.FC = () => {
               src={imgMatch[2]}
               alt={imgMatch[1]}
               referrerPolicy="no-referrer"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (target.src.includes('/src/assets/images/')) {
+                  target.src = target.src.replace('/src/assets/images/', '/images/');
+                }
+              }}
               className="w-full aspect-16/9 object-cover"
             />
             {imgMatch[1] && (
@@ -504,6 +510,12 @@ export const ArticleView: React.FC = () => {
             src={article.coverImage}
             alt={article.coverImageAlt}
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              const target = e.currentTarget;
+              if (target.src.includes('/src/assets/images/')) {
+                target.src = target.src.replace('/src/assets/images/', '/images/');
+              }
+            }}
             className="w-full aspect-16/9 object-cover"
           />
           {article.coverCaption && (

@@ -20,31 +20,39 @@ import {
   Code,
   Sparkles,
 } from 'lucide-react';
+import {
+  heroEditorialSpaces,
+  coverNeuralNature,
+  coverKyotoSolitude,
+  coverTypographyInk,
+  coverPhilosophyMemory,
+  coverNocturnalUrbanism,
+} from '../assets/images';
 
 const COVER_PRESETS = [
   {
     title: 'Architectural Light',
-    url: '/src/assets/images/hero_editorial_spaces_1791176660658.jpg',
+    url: heroEditorialSpaces,
   },
   {
     title: 'Neural Networks & Nature',
-    url: '/src/assets/images/cover_neural_nature_1791176673263.jpg',
+    url: coverNeuralNature,
   },
   {
     title: 'Rain & Solitude (Kyoto)',
-    url: '/src/assets/images/cover_kyoto_solitude_1791176687903.jpg',
+    url: coverKyotoSolitude,
   },
   {
     title: 'Letterpress & Type',
-    url: '/src/assets/images/cover_typography_ink_1791176701904.jpg',
+    url: coverTypographyInk,
   },
   {
     title: 'Philosophical Reflection',
-    url: '/src/assets/images/cover_philosophy_memory_1791961016425.jpg',
+    url: coverPhilosophyMemory,
   },
   {
     title: 'The Nocturnal City',
-    url: '/src/assets/images/cover_nocturnal_urbanism_1791961017486.jpg',
+    url: coverNocturnalUrbanism,
   },
 ];
 
